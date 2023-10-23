@@ -1,0 +1,15 @@
+.widget-list-item  :Hover .widget-filter-item-text{padding-left:10px; transition: all .2s};
+li .widget-list-item {
+  cursor: pointer;
+}
+.page-link{
+  cursor: pointer;
+}
+
+i.ci-heart-filled { color: olive;}
+.dropdown-item:hover{transform: translateX(10px);
+  width: 95%; };
+
+  .tns-carousel [data-controls=next] {
+    right: -10%;
+}
