@@ -21,26 +21,8 @@ require_once("./back-end/dbconnection.php");
 
 
 
+
  
-// category style filter auto select based on type usint ajax
-// $script.= '  
-
-
-
-$script.='
- $("#list-view-btn").click( function(){
-  document.cookie = "list-view-cookie=true;   path=/";
-  location.reload();
- })
- $("#grid-view-btn").click( function(){
-  document.cookie = "list-view-cookie =; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
-  location.reload();
- })
-';
-$script.= '
-
-';
-
   ?>
 
 
@@ -734,7 +716,13 @@ $script.= '
           <span class="left-page-arrow" style=" border: 1px solid #ddd;padding: 8px 7px; background: #b1b1b1a8; cursor: pointer;" > <i class="ci-arrow-left "></i></span>
           <div  style="width:235px; overflow:hidden">
             <ul class="pagination  pageItemlist m-auto" style="width:max-content; transition:.3s">
-            </ul>
+            <li class="page-item border rounded" style="width:40px"> <a class="page-link ">1 </a></li>
+            <li class="page-item border rounded" style="width:40px"> <a class="page-link ">2 </a></li>
+            <li class="page-item border rounded" style="width:40px"> <a class="page-link ">3 </a></li>
+            <li class="page-item border rounded" style="width:40px"> <a class="page-link ">4 </a></li>
+            <li class="page-item border rounded" style="width:40px"> <a class="page-link ">5 </a></li>
+          
+          </ul>
     
           </div>
           <span class="right-page-arrow" style=" border: 1px solid #ddd;padding: 8px 7px; background: #b1b1b1a8; cursor: pointer;" > <i class="ci-arrow-right "></i></span>

@@ -92,6 +92,7 @@ if ($result->num_rows > 0) {
     // Retrieve data from the result set
     $img_url = ($row['img_url']) ? "img/product/" . $row['img_url'] : "img/product/blank-img.png";
     $category = $row['category'];
+    $product_id = $row['product_id'];
     $style = $row['style'];
     $product_name = $row['product_name'];
     $price = $row['price'];
@@ -106,14 +107,14 @@ if ($result->num_rows > 0) {
           <i class="ci-heart"></i>
         </button>
         <div class="w-100" style="height:185px">
-          <a class="card-img-top w-100 h-100 d-block overflow-hidden" href="shop-single-v1.php">
+          <a class="card-img-top w-100 h-100 d-block overflow-hidden" href="shop-single-v1.php?id=$product_id" >
             <img class="w-100 h-100" src="$img_url" alt="Product">
           </a>
         </div>
         <div class="card-body py-2">
-          <a class="product-meta d-block fs-xs pb-1" href="#">$category $style</a>
+          <a class="product-meta d-block fs-xs pb-1" href="#">$style</a>
           <h3 class="product-title fs-sm">
-            <a href="shop-single-v1.php">$product_name</a>
+            <a href="shop-single-v1.php?id=$product_id" >$product_name</a>
           </h3>
           <div class="d-flex justify-content-between">
             <div class="product-price">
@@ -136,8 +137,8 @@ if ($result->num_rows > 0) {
             </button>
           </div>
           <div class="text-center">
-            <a class="nav-link-style fs-ms" href="#quick-view" data-bs-toggle="modal">
-              <i class="ci-eye align-middle me-1"></i>Quick view
+            <a class="nav-link-style fs-ms" href="shop-single-v1.php?id=$product_id" >
+              <i class="ci-eye align-middle me-1"></i>View more
             </a>
           </div>
         </div>

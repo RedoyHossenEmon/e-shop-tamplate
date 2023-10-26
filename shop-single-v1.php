@@ -1,20 +1,44 @@
-<?php require_once("includes_file/header.php") ?>
+<?php 
+require_once("includes_file/header.php");
+$script .= '$(".product-gallery img").css("height", "100%")';
 
-      <!-- Page Title-->
+$proId = "";
+if(isset($_GET['id'])){
+  $proId = $_GET['id'];
+}
+$query = "SELECT * FROM productlist WHERE product_id = '$proId'" ;
+
+// Execute the SQL query
+$result = $conn->query($query);
+
+
+// Check if there are results and limit to a maximum of 16 records
+
+if ($result->num_rows > 0) {
+  while (($row = $result->fetch_assoc())) {
+    // Retrieve data from the result set
+    $img_url = ($row['img_url']) ? "img/product/" . $row['img_url'] : "img/product/blank-img.png";
+    $price = $row['price'];
+    $ex_price = $row['ex_price'];
+    $product_name = $row['product_name'];
+
+
+  echo <<<EOD
+
       <div class="page-title-overlap bg-dark pt-4">
         <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
           <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
-                <li class="breadcrumb-item"><a class="text-nowrap" href="index.html"><i class="ci-home"></i>Home</a></li>
-                <li class="breadcrumb-item text-nowrap"><a href="#">Shop</a>
+                <li class="breadcrumb-item"><a class="text-nowrap" href="index.php"><i class="ci-home"></i>Home</a></li>
+                <li class="breadcrumb-item text-nowrap"><a href="shop-products.php">Shop</a>
                 </li>
-                <li class="breadcrumb-item text-nowrap active" aria-current="page">Product Page v.1</li>
+                <li class="breadcrumb-item text-nowrap active" aria-current="page">Product Page </li>
               </ol>
             </nav>
           </div>
           <div class="order-lg-1 pe-lg-4 text-center text-lg-start">
-            <h1 class="h3 text-light mb-0">Sports Hooded Sweatshirt</h1>
+            <h1 class="h3 text-light mb-0"> $product_name</h1>
           </div>
         </div>
       </div>
@@ -25,24 +49,30 @@
             <div class="row">
               <!-- Product gallery-->
               <div class="col-lg-7 pe-lg-0 pt-lg-4">
-                <div class="product-gallery">
-                  <div class="product-gallery-preview order-sm-2">
-                    <div class="product-gallery-preview-item active" id="first"><img class="image-zoom" src="img/shop/single/gallery/01.jpg" data-zoom="img/shop/single/gallery/01.jpg" alt="Product image">
-                      <div class="image-zoom-pane"></div>
+
+                  <div class="product-gallery">
+                    <div class="product-gallery-preview order-sm-2">
+                      <div class="product-gallery-preview-item active" id="first"><img class="image-zoom" src="$img_url" data-zoom="$img_url" alt="Product image">
+                        <div class="image-zoom-pane"></div>
+                      </div>
+                      <div class="product-gallery-preview-item" id="second"><img class="image-zoom" src="img/shop/single/gallery/02.jpg" data-zoom="img/shop/single/gallery/02.jpg" alt="Product image">
+                        <div class="image-zoom-pane"></div>
+                      </div>
+                      <div class="product-gallery-preview-item" id="third"><img class="image-zoom" src="img/shop/single/gallery/03.jpg" data-zoom="img/shop/single/gallery/03.jpg" alt="Product image">
+                        <div class="image-zoom-pane"></div>
+                      </div>
+                      <div class="product-gallery-preview-item" id="fourth"><img class="image-zoom" src="img/shop/single/gallery/04.jpg" data-zoom="img/shop/single/gallery/04.jpg" alt="Product image">
+                        <div class="image-zoom-pane"></div>
+                      </div>
                     </div>
-                    <div class="product-gallery-preview-item" id="second"><img class="image-zoom" src="img/shop/single/gallery/02.jpg" data-zoom="img/shop/single/gallery/02.jpg" alt="Product image">
-                      <div class="image-zoom-pane"></div>
-                    </div>
-                    <div class="product-gallery-preview-item" id="third"><img class="image-zoom" src="img/shop/single/gallery/03.jpg" data-zoom="img/shop/single/gallery/03.jpg" alt="Product image">
-                      <div class="image-zoom-pane"></div>
-                    </div>
-                    <div class="product-gallery-preview-item" id="fourth"><img class="image-zoom" src="img/shop/single/gallery/04.jpg" data-zoom="img/shop/single/gallery/04.jpg" alt="Product image">
-                      <div class="image-zoom-pane"></div>
+                    <div class="product-gallery-thumblist order-sm-1">
+                      <a class="product-gallery-thumblist-item active" href="#first"><img src="$img_url" alt="Product thumb"></a>
+                      <a class="product-gallery-thumblist-item" href="#second"><img src="img/shop/single/gallery/th02.jpg" alt="Product thumb"></a>
+                      <a class="product-gallery-thumblist-item" href="#third"><img src="img/shop/single/gallery/th03.jpg" alt="Product thumb"></a>
+                      <a class="product-gallery-thumblist-item" href="#fourth"><img src="img/shop/single/gallery/th04.jpg" alt="Product thumb"></a>
                     </div>
                   </div>
-                  <div class="product-gallery-thumblist order-sm-1"><a class="product-gallery-thumblist-item active" href="#first"><img src="img/shop/single/gallery/th01.jpg" alt="Product thumb"></a><a class="product-gallery-thumblist-item" href="#second"><img src="img/shop/single/gallery/th02.jpg" alt="Product thumb"></a><a class="product-gallery-thumblist-item" href="#third"><img src="img/shop/single/gallery/th03.jpg" alt="Product thumb"></a><a class="product-gallery-thumblist-item" href="#fourth"><img src="img/shop/single/gallery/th04.jpg" alt="Product thumb"></a><a class="product-gallery-thumblist-item video-item" href="https://www.youtube.com/watch?v=1vrXpMLLK14" data-lg-id="3047e596-df20-4869-9563-ad47e69b05cc">
-                      <div class="product-gallery-thumblist-item-text"><i class="ci-video"></i>Video</div></a></div>
-                </div>
+
               </div>
               <!-- Product details-->
               <div class="col-lg-5 pt-4 pt-lg-0">
@@ -52,8 +82,8 @@
                       </div><span class="d-inline-block fs-sm text-body align-middle mt-1 ms-1">74 Reviews</span></a>
                     <button class="btn-wishlist me-0 me-lg-n3" type="button" data-bs-toggle="tooltip" aria-label="Add to wishlist" data-bs-original-title="Add to wishlist"><i class="ci-heart"></i></button>
                   </div>
-                  <div class="mb-3"><span class="h3 fw-normal text-accent me-1">$18.<small>99</small></span>
-                    <del class="text-muted fs-lg me-3">$25.<small>00</small></del><span class="badge bg-danger badge-shadow align-middle mt-n2">Sale</span>
+                  <div class="mb-3"><span class="h3 fw-normal text-accent me-1">$$price</span>
+                    <del class="text-muted fs-lg me-3">$$ex_price</del><span class="badge bg-danger badge-shadow align-middle mt-n2">Sale</span>
                   </div>
                   <div class="fs-sm mb-4"><span class="text-heading fw-medium me-1">Color:</span><span class="text-muted" id="colorOption">Red/Dark blue/White</span></div>
                   <div class="position-relative me-n4 mb-3">
@@ -423,6 +453,20 @@
           </div>
         </div>
       </div>
+  EOD;
+
+
+
+
+    } }else{
+      echo '
+      <div class="container py-4 bg-dark ">
+          <h1 class="h3 text-light "> Somthing Went wrong!</h1>
+    </div>';
+
+    }
+    ?>
+    
       <!-- Product carousel (Style with)-->
       <div class="container pt-5">
         <h2 class="h3 text-center pb-4">Style with</h2>
