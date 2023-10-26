@@ -8,9 +8,10 @@ $jsonData = "";
 $pageList ="";
 
 $conditions = "";
-$recordsPerPage = 15;
+$recordsPerPage = 20;
 $currentPage = isset($_GET['paginate'])? $_GET['paginate'] : 1 ;
 $start = ($currentPage - 1) * $recordsPerPage;
+$totalProduct= 0;
 
 
 // Check if a search parameter is provided
@@ -35,6 +36,38 @@ $start = ($currentPage - 1) * $recordsPerPage;
  if (isset($_GET['maxPrice'])) {
   $maxPriceValue = trim($_GET['maxPrice']);
   $conditions .= " AND (price <= $maxPriceValue)";
+}
+// Check price sorting is provided
+ if (isset($_GET['sorting'])) {
+  $sortValue = $_GET['sorting'];
+
+switch ($sortValue) {
+  case 'patoz':
+
+    $conditions .= " ORDER BY price ASC ";
+    break;
+  
+  case 'pztoa':
+ 
+    $conditions .= " ORDER BY price DESC ";
+    break;
+  
+  case 'atoz':
+ 
+    $conditions .= " ORDER BY product_name ASC ";
+    break;
+  
+  case 'ztoa':
+
+    $conditions .= " ORDER BY product_name DESC ";
+    break;
+  
+  default:
+   
+  $conditions .= "";
+    break;
+}
+
 }
 
 // Check if a brand parameter is provided
@@ -116,7 +149,8 @@ if ($result->num_rows > 0) {
   }
 
   $result = $conn->query($query);
-$totalPage = ceil($result->num_rows / $recordsPerPage) ;
+ $totalProduct= $result->num_rows ;
+$totalPage = ceil($totalProduct/ $recordsPerPage) ;
 
 
 // $totalPage = 45;
@@ -139,7 +173,7 @@ $totalPage = ceil($result->num_rows / $recordsPerPage) ;
 
 
 
-echo json_encode( array('products' => $jsonData, 'pagelist' => $pageList ));
+echo json_encode( array('products' => $jsonData, 'pagelist' => $pageList, 'totalProduct' => $totalProduct));
 
 
 

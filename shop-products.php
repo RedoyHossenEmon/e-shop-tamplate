@@ -691,18 +691,18 @@ $script.= '
         <div class="d-flex justify-content-center justify-content-sm-between align-items-center pt-2 pb-4 pb-sm-5">
           <div class="d-flex flex-wrap">
             <div class="d-flex align-items-center flex-nowrap me-3 me-sm-4 pb-3">
-              <label class="text-light opacity-75 text-nowrap fs-sm me-2 d-none d-sm-block" for="sorting">Sort by:</label>
-              <select class="form-select" id="sorting">
+              <label class="text-light opacity-75 text-nowrap fs-sm me-2 " for="product-sorting">Sort by:</label>
+              <select class="form-select" id="product-sorting">
                 <option>Popularity</option>
-                <option>Low - Hight Price</option>
-                <option>High - Low Price</option>
+                <option value="patoz">Low - Hight Price</option>
+                <option value="pztoa">High - Low Price</option>
                 <option>Average Rating</option>
-                <option>A - Z Order</option>
-                <option>Z - A Order</option>
-              </select><span class="fs-sm text-light opacity-75 text-nowrap ms-2 d-none d-md-block">of 287 products</span>
+                <option value="atoz">A - Z Order</option>
+                <option value="ztoa">Z - A Order</option>
+              </select><span class="total-product fs-sm text-light opacity-75 text-nowrap ms-2 d-none d-md-block">of 287 products</span>
             </div>
           </div>
-          <div class="d-flex pb-3"><a class="nav-link-style nav-link-light me-3" href="#"><i class="ci-arrow-left"></i></a><span class="fs-md text-light">1 / 5</span><a class="nav-link-style nav-link-light ms-3" href="#"><i class="ci-arrow-right"></i></a></div>
+          <div class="d-flex pb-3 pagination"><a class="nav-link-style nav-link-light me-3 pagePrev" href="#"><i class="ci-arrow-left"></i></a><span class="fs-md text-light  page-link-static">1 / 5</span><a class="nav-link-style nav-link-light ms-3 pageNext" href="#"><i class="ci-arrow-right"></i></a></div>
           <div class="d-none d-sm-flex pb-3" id="shop-view-style">
             <a class="btn btn-icon nav-link-style nav-link-light view-style-grid" href="#"><i class="ci-view-grid"></i></a>
             <a class="btn btn-icon nav-link-style bg-light text-dark disabled opacity-100 me-2 view-style-list" href="#"><i class="ci-view-list"></i></a>
@@ -719,33 +719,32 @@ $script.= '
     </div>
 
        <hr class="my-3">
-
-       <nav class="d-flex justify-content-between pt-2 col-lg-7 m-auto" aria-label="Page navigation">
-  <ul class="pagination">
-    <li class="page-item border rounded">
-      <a class="page-link pagePrev"  href="#"> <i class="ci-arrow-left me-2"></i>Prev </a>
-    </li>
-  </ul>
-  <div class="d-flex pagenumWrap">
-     <span class="left-page-arrow" style=" border: 1px solid #ddd;padding: 8px 7px; background: #b1b1b1a8; cursor: pointer;" > <i class="ci-arrow-left "></i></span>
-  <div  style="width:235px; overflow:hidden">
- 
-
-  <ul class="pagination pageItemlist m-auto" style="width:max-content; transition:.3s">
-
-
-</ul>
-</div>
-<span class="right-page-arrow" style=" border: 1px solid #ddd;padding: 8px 7px; background: #b1b1b1a8; cursor: pointer;" > <i class="ci-arrow-right "></i></span>
-
-</div>
-  <ul class="pagination">
-    <li class="page-item border rounded">
-      <a class="page-link pageNext" href="#" >Next<i class="ci-arrow-right ms-2"></i></a>
-    </li>
-  </ul>
-</nav>
-
+       <nav id="paginateNav" class="d-flex justify-content-between pt-2 col-lg-7 m-auto" aria-label="Page navigation">
+        <ul class="pagination  d-none d-sm-block ">
+          <li class="page-item border rounded">
+            <a class="page-link pagePrev"  href="#"> <i class="ci-arrow-left me-2"></i>Prev </a>
+          </li>
+        </ul>
+        <ul class="d-sm-none pagination m-auto">
+            <li class="page-item border rounded"> <a class="page-link pagePrev"  href="#"> <i class="ci-arrow-left"></i> </a> </li>
+            <li class="page-item "><span class="page-link page-link-static"></span></li>
+            <li class="page-item border rounded"> <a class="page-link pageNext"  href="#"> <i class="ci-arrow-right "></i> </a> </li>
+          </ul>
+        <div class="d-flex pagenumWrap d-none d-sm-flex ">
+          <span class="left-page-arrow" style=" border: 1px solid #ddd;padding: 8px 7px; background: #b1b1b1a8; cursor: pointer;" > <i class="ci-arrow-left "></i></span>
+          <div  style="width:235px; overflow:hidden">
+            <ul class="pagination  pageItemlist m-auto" style="width:max-content; transition:.3s">
+            </ul>
+    
+          </div>
+          <span class="right-page-arrow" style=" border: 1px solid #ddd;padding: 8px 7px; background: #b1b1b1a8; cursor: pointer;" > <i class="ci-arrow-right "></i></span>
+        </div>
+        <ul class="pagination d-none d-sm-block "">
+          <li class="page-item border rounded">
+            <a class="page-link pageNext" href="#" >Next<i class="ci-arrow-right ms-2"></i></a>
+          </li>
+        </ul>
+      </nav>
 
 
         

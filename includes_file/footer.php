@@ -199,9 +199,8 @@ function ajaxRequest(ajaxRequestValue, pageNo = 1){
                 productList.append(response.products);
                 
                 pagination.append(response.pagelist)
-                paginateFunc(); pageclicking();
-
-      
+                paginateFunc(response.totalProduct); pageclicking();
+            
               },
             error: function(error) {
                 console.error('Error:', error);
@@ -210,11 +209,17 @@ function ajaxRequest(ajaxRequestValue, pageNo = 1){
 
         }
 // Function to handle pagination
-function paginateFunc() {
-  const $pageItemlist = $('.pageItemlist');
-  const $activePage = $pageItemlist.find('.active');
-  const activePage = $activePage.text();
-  const totalPage = $pageItemlist.find('li').length;
+function paginateFunc(totalProduct) {
+  const productamount = $('.total-product');
+  productamount.html("of "+ totalProduct +" products");
+  if(totalProduct < 15){
+  $('#paginateNav').addClass('d-none');
+  }else{ $('#paginateNav').removeClass('d-none');}
+  const pageItemlist = $('.pageItemlist');
+  const pagelinkstatic = $('.page-link-static');
+
+  const activePage = pageItemlist.find('.active').text();
+  const totalPage = pageItemlist.find('li').length;
   let translateRate = (activePage - 2) * 41;
 
   if (activePage >= totalPage - 2) {
@@ -225,7 +230,8 @@ function paginateFunc() {
     translateRate = 0;
   }
 
-  $pageItemlist.css('transform', `translateX(-${translateRate}px)`);
+  pagelinkstatic.html(activePage +"/"+totalPage)
+  pageItemlist.css('transform', `translateX(-${translateRate}px)`);
 }
 
 // Function to handle page clicking
@@ -241,8 +247,8 @@ function pageclicking() {
 // Click event for previous and next page buttons
 $('.pagination .pagePrev, .pagination .pageNext').click(function(event) {
   event.preventDefault();
-  const $activePage = $('.pageItemlist .active');
-  const active = parseInt($activePage.text());
+  const activePage = $('.pageItemlist .active');
+  const active = parseInt(activePage.text());
   const total = $('.pageItemlist li').length;
   const page = $(this).hasClass('pagePrev') ? active - 1 : active + 1;
 
@@ -254,10 +260,10 @@ $('.pagination .pagePrev, .pagination .pageNext').click(function(event) {
 
 // Click event for left arrow button
 $('.pagenumWrap .left-page-arrow').click(function(event) {
-  const $pageItemlist = $('.pageItemlist');
-  const currentTranslate = parseFloat($pageItemlist.css('transform').split(',')[4]);
+  const pageItemlist = $('.pageItemlist');
+  const currentTranslate = parseFloat(pageItemlist.css('transform').split(',')[4]);
   const translateRate = (currentTranslate >= -180) ? 0 : (currentTranslate + 205);
-  $pageItemlist.css('transform', `translateX(${translateRate}px)`);
+  pageItemlist.css('transform', `translateX(${translateRate}px)`);
 });
 
 // Click event for right arrow button
@@ -292,6 +298,15 @@ $(".widget-list-link").click(function(event) {
   }
 
   ajaxRequestValue["category"] = categoryItem;
+  ajaxRequest(ajaxRequestValue);
+});
+// Event handler for sorting products based on sections
+$("#product-sorting").change(function() {
+  
+  var sortingval = $(this).val();
+
+
+  ajaxRequestValue["sorting"] = sortingval;
   ajaxRequest(ajaxRequestValue);
 });
 
