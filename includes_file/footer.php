@@ -173,14 +173,18 @@
     <!-- Main theme script-->
     <script src="js/theme.min.js"></script>
     <script src="js/jquery.js"></script>
-    <script> <?php if (!function_exists('headerjsScript')) { function headerjsScript(){}} headerjsScript(); ?> </script>
+    <script>  $(document).ready(function() { <?php echo $headScript; ?>  })</script>
     <!-- script for body section  -->
-    <script>   $(document).ready(function() { <?php echo $script;  ?>   })</script>
+    <script>  $(document).ready(function() { <?php echo $script;  ?>   })</script>
 
 
-<script> <?php require_once("includes_file/shop-products.js"); ?> </script>
+<?php require_once("includes_file/script-shop-products.php"); ?>
 
+<script>
 
+const widgetlinks = $('.widget-links');
+
+</script>
 
   </body>
 

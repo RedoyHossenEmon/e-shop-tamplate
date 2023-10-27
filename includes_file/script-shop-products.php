@@ -1,3 +1,4 @@
+<script>
 // Declare an empty array and initialize the resultDiv variable
 const ajaxRequestValue = {};
 const productList = $('#product-list-wrapp');
@@ -169,3 +170,22 @@ $('#brand-filter-List input[type="checkbox"]').change(function() {
   ajaxRequestValue['brand'] = checkedBrandsArray;
   ajaxRequest(ajaxRequestValue);
 });
+
+<?php 
+//  if get request with any category by default lets setup ajax request
+if(isset($_GET['category'])){
+  $categoryItem = $_GET['category'];
+  echo "
+  ajaxRequestValue['category'] = '$categoryItem';
+  ajaxRequest(ajaxRequestValue);
+";}
+
+?>
+
+
+
+
+
+
+
+</script>

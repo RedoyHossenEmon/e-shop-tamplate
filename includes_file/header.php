@@ -2,13 +2,12 @@
 include('back-end/dbconnection.php');
 // execute javascript code for function for header functionalty mantain 
 $script = null;
+$headScript = null;
 
-function headerjsScript(){
-  global $conn;
 
   //  alert massege showing and hide if isset coockie
   if(isset($_COOKIE['alertmsg'])){
-   echo "
+    $headScript.= "
       document.querySelector('.alertContainer').style.top='0px';
       document.querySelector('.alertMsg').innerHTML='" . $_COOKIE['alertmsg'] . "';
 
@@ -17,7 +16,7 @@ function headerjsScript(){
     }, 8000)
     ";
   }
-  echo "
+  $headScript.= "
   // set logout link of every logout button
   $('#logoutBtn').attr('href', '#confirm-logout');
   $('#logoutBtn').attr('data-bs-toggle', 'modal');
@@ -35,7 +34,7 @@ function headerjsScript(){
   $email = $user['email'];
   $phone = $user['phone'];
   // global $firstname, $lastname, $email, $phone;
-  echo"
+  $headScript.="
   
     document.querySelector('.userNamechar a').setAttribute('href', 'account-setting.php');
     document.querySelector('.userNamechar').classList.add('dropdown');
@@ -54,14 +53,19 @@ function headerjsScript(){
  }else{
 
   // setting account link to signin form if not looged in 
-   echo "
+   $headScript.= "
    
    $('.userNamechar a').each(function() { $(this).attr('href', '#signin-modal'); })
    $('.userNamechar a').each(function() { $(this).attr('data-bs-toggle', 'modal'); })
  
  ";}
 
-}
+ $headScript.="
+ widgetlinks.each(function() { 
+  const categorylink = $(this).find('h5').text();
+$(this).find('a').attr('href', 'shop-products.php?category='+categorylink); })
+
+ ";
 
 
 ?>
@@ -342,33 +346,34 @@ function headerjsScript(){
                       <div class="mega-dropdown-column pt-3 pt-sm-4 px-2 px-lg-3">
                         <div class="widget widget-links">
                           <a class="d-block overflow-hidden rounded-3 mb-3" href="#"><img src="img/shop/departments/01.jpg" alt="Clothing"></a>
-                          <h6 class="fs-base mb-2">Clothing</h6>
+                         <a class="widget-list-link" href="#"> <h5 class="fs-base mb-2">Clothing</h5></a>
                           <ul class="widget-list">
-                            <li class="widget-list-item mb-1"><a class="widget-list-link" href="#">Women's clothing</a></li>
-                            <li class="widget-list-item mb-1"><a class="widget-list-link" href="#">Men's clothing</a></li>
-                            <li class="widget-list-item mb-1"><a class="widget-list-link" href="#">Kid's clothing</a></li>
+                            <li class="mb-1 widget-list-link">Women's clothing</a></li>
+                            <li class="mb-1 widget-list-link">Men's clothing</a></li>
+                            <li class="mb-1 widget-list-link">Kid's clothing</a></li>
                           </ul>
                         </div>
                       </div>
                       <div class="mega-dropdown-column pt-4 px-2 px-lg-3">
                         <div class="widget widget-links">
                           <a class="d-block overflow-hidden rounded-3 mb-3" href="#"><img src="img/shop/departments/02.jpg" alt="Shoes"></a>
-                          <h6 class="fs-base mb-2">Shoes</h6>
+                          <a class="widget-list-link" href="#"> <h5 class="fs-base mb-2">Shoes</h5></a>
                           <ul class="widget-list">
-                            <li class="widget-list-item mb-1"><a class="widget-list-link" href="#">Women's shoes</a></li>
-                            <li class="widget-list-item mb-1"><a class="widget-list-link" href="#">Men's shoes</a></li>
-                            <li class="widget-list-item mb-1"><a class="widget-list-link" href="#">Kid's shoes</a></li>
+                            <li class="widget-list-link mb-1">Women's shoes</li>
+                            <li class="widget-list-link mb-1">Men's shoes</li>
+                            <li class="widget-list-link mb-1">Kid's shoes</li>
                           </ul>
                         </div>
                       </div>
                       <div class="mega-dropdown-column pt-4 px-2 px-lg-3">
                         <div class="widget widget-links">
-                          <a class="d-block overflow-hidden rounded-3 mb-3" href="#"><img src="img/shop/departments/03.jpg" alt="Gadgets"></a>
-                          <h6 class="fs-base mb-2">Gadgets</h6>
+                          <a class="d-block overflow-hidden rounded-3 mb-3" href="#"><img src="img/shop/categories/luggage.png" alt="Bags"></a>
+
+                          <a class="widget-list-link" href="#"> <h5 class="fs-base mb-2">Bags</h5></a>
                           <ul class="widget-list">
-                            <li class="widget-list-item mb-1"><a class="widget-list-link" href="#">Smartphones &amp; Tablets</a></li>
-                            <li class="widget-list-item mb-1"><a class="widget-list-link" href="#">Wearable gadgets</a></li>
-                            <li class="widget-list-item mb-1"><a class="widget-list-link" href="#">E-book readers</a></li>
+                            <li class="widget-list-link mb-1">Backpack</li>
+                            <li class="widget-list-link mb-1">Luggage</li>
+                            <li class="widget-list-link mb-1">Wallets</li>
                           </ul>
                         </div>
                       </div>
@@ -376,34 +381,37 @@ function headerjsScript(){
                     <div class="d-flex flex-wrap flex-sm-nowrap">
                       <div class="mega-dropdown-column pt-4 px-2 px-lg-3">
                         <div class="widget widget-links">
-                          <a class="d-block overflow-hidden rounded-3 mb-3" href="#"><img src="img/shop/departments/04.jpg" alt="Furniture"></a>
-                          <h6 class="fs-base mb-2">Furniture &amp; Decor</h6>
+                          <a class="d-block overflow-hidden rounded-3 mb-3" href="#"><img src="img/shop/categories/watch.jpg" alt="Watches"></a>
+
+                          <a class="widget-list-link" href="#"> <h5 class="fs-base mb-2">Watches</h5></a>
                           <ul class="widget-list">
-                            <li class="widget-list-item mb-1"><a class="widget-list-link" href="#">Home furniture</a></li>
-                            <li class="widget-list-item mb-1"><a class="widget-list-link" href="#">Office furniture</a></li>
-                            <li class="widget-list-item mb-1"><a class="widget-list-link" href="#">Lighting and decoration</a></li>
+                            <li class="widget-list-link mb-1">Fassion Watch</li>
+                            <li class="widget-list-link mb-1">Classic Watch</li>
+                            <li class="widget-list-link mb-1">Sports Watch</li>
                           </ul>
                         </div>
                       </div>
                       <div class="mega-dropdown-column pt-4 px-2 px-lg-3">
                         <div class="widget widget-links">
-                          <a class="d-block overflow-hidden rounded-3 mb-3" href="#"><img src="img/shop/departments/05.jpg" alt="Accessories"></a>
-                          <h6 class="fs-base mb-2">Accessories</h6>
+                          <a class="d-block overflow-hidden rounded-3 mb-3" href="#"><img src="img/shop/categories/05.jpg" alt="Accessories"></a>
+
+                          <a class="widget-list-link" href="#"> <h5 class="fs-base mb-2">Accessories</h5></a>
                           <ul class="widget-list">
-                            <li class="widget-list-item mb-1"><a class="widget-list-link" href="#">Hats</a></li>
-                            <li class="widget-list-item mb-1"><a class="widget-list-link" href="#">Sunglasses</a></li>
-                            <li class="widget-list-item mb-1"><a class="widget-list-link" href="#">Bags</a></li>
+                            <li class="widget-list-link mb-1">Hats</li>
+                            <li class="widget-list-link mb-1">Belts</li>
+                            <li class="widget-list-link mb-1">Cosmetics</li>
                           </ul>
                         </div>
                       </div>
                       <div class="mega-dropdown-column pt-4 px-2 px-lg-3">
                         <div class="widget widget-links">
                           <a class="d-block overflow-hidden rounded-3 mb-3" href="#"><img src="img/shop/departments/06.jpg" alt="Entertainment"></a>
-                          <h6 class="fs-base mb-2">Entertainment</h6>
+
+                          <a class="widget-list-link" href="#"> <h5 class="fs-base mb-2"></h5></a>
                           <ul class="widget-list">
-                            <li class="widget-list-item mb-1"><a class="widget-list-link" href="#">Kid's toys</a></li>
-                            <li class="widget-list-item mb-1"><a class="widget-list-link" href="#">Video games</a></li>
-                            <li class="widget-list-item mb-1"><a class="widget-list-link" href="#">Outdoor / Camping</a></li>
+                            <li class="widget-list-link mb-1">Kid's toys</li>
+                            <li class="widget-list-link mb-1">Video games</li>
+                            <li class="widget-list-link mb-1">Outdoor / Camping</li>
                           </ul>
                         </div>
                       </div>
