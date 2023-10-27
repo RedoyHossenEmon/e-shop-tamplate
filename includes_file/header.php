@@ -230,10 +230,14 @@ function headerjsScript(){
                 <span class="navbar-tool-tooltip">Wishlist</span>
                 <div class="navbar-tool-icon-box"><i class="navbar-tool-icon ci-heart"></i></div>
               </a>
-              <div class="navbar-tool dropdown ms-3  ">
+              
+  <?php if(isset($_SESSION['userId'])){
+          
+      echo  <<<EOD
+            <div class="navbar-tool dropdown ms-3  ">
                 <a class="navbar-tool-icon-box bg-secondary dropdown-toggle" href="#shop-cart.html"><span class="navbar-tool-label">4</span><i class="navbar-tool-icon ci-cart"></i></a><a class="navbar-tool-text" href="#shop-cart.html"><small>My Cart</small>$265.00</a>
                 <!-- Cart dropdown-->
-                <div class="dropdown-menu dropdown-menu-end ">
+               <div class="dropdown-menu dropdown-menu-end ">
                   <div class="widget widget-cart px-3 pt-2 pb-3 " style="width: 20rem;">
                     <div style="height: 15rem;" data-simplebar data-simplebar-auto-hide="false">
                       <div class="widget-cart-item pb-2 border-bottom">
@@ -283,8 +287,15 @@ function headerjsScript(){
                     </div>
                     <a class="btn btn-primary btn-sm d-block w-100" href="#checkout-details.html"><i class="ci-card me-2 fs-base align-middle"></i>Checkout</a>
                   </div>
-                </div>
-              </div>
+               </div>
+                
+            </div>
+      EOD;
+    }
+ ?>     
+
+
+
               <div class=" navbar-tool userNamechar" style="width: 125px; margin-left: 30px;">
         
                 <a class="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" >
