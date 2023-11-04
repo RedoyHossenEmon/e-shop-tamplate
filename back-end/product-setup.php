@@ -37,41 +37,33 @@ $totalProduct= 0;
   $maxPriceValue = trim($_GET['maxPrice']);
   $conditions .= " AND (price <= $maxPriceValue)";
 }
-// Check price sorting is provided
- if (isset($_GET['sorting'])) {
+// Check price or product name sorting request is provided
+if (isset($_GET['sorting'])) {
   $sortValue = $_GET['sorting'];
 
-switch ($sortValue) {
+ switch ($sortValue) {
   case 'patoz':
-
     $conditions .= " ORDER BY price ASC ";
     break;
   
   case 'pztoa':
- 
     $conditions .= " ORDER BY price DESC ";
     break;
   
   case 'atoz':
- 
     $conditions .= " ORDER BY product_name ASC ";
     break;
   
   case 'ztoa':
-
     $conditions .= " ORDER BY product_name DESC ";
     break;
   
-  default:
-   
-  $conditions .= "";
-    break;
-}
+ }
 
 }
 
 // Check if a brand parameter is provided
- if (isset($_GET['brand'])) {
+if (isset($_GET['brand'])) {
   $brandValue = implode("','", $_GET['brand']);
   $conditions .= " AND (brand IN ('$brandValue'))";
 }
@@ -103,7 +95,7 @@ if ($result->num_rows > 0) {
      <div class="col-md-3 col-sm-6 px- mb-4">
       <div class="card product-card">
         <span class="badge bg-danger badge-shadow">Sale</span>
-        <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" aria-label="Add to wishlist" data-bs-original-title="Add to wishlist">
+        <button class="btn-wishlist btn-sm" type="button" title="Add to wishlist" data-proid="$product_id">
           <i class="ci-heart"></i>
         </button>
         <div class="w-100" style="height:185px">

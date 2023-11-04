@@ -98,7 +98,7 @@ if ($result->num_rows > 0) {
      <div class="col-md-3 col-sm-6 px- mb-4">
       <div class="card product-card">
         <span class="badge bg-danger badge-shadow">Sale</span>
-        <button class="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" aria-label="Add to wishlist" data-bs-original-title="Add to wishlist">
+        <button class="btn-wishlist btn-sm" type="button" data-proId="$product_id">
           <i class="ci-heart"></i>
         </button>
         <div class="w-100" style="height:185px">

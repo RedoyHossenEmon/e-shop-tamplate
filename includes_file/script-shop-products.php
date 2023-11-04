@@ -14,11 +14,14 @@ function ajaxRequest(ajaxRequestValue, pageNo = 1){
             dataType: 'json', 
             success: function(response) {
     
-                productList.empty();   pagination.empty();
+                productList.empty();  
+                pagination.empty();
                 productList.append(response.products);
                 
                 pagination.append(response.pagelist)
-                paginateFunc(response.totalProduct); pageclicking();
+                paginateFunc(response.totalProduct); 
+                pageclicking();
+                wishlistbtn()
             
               },
             error: function(error) {
@@ -183,6 +186,32 @@ if(isset($_GET['category'])){
 ?>
 
 
+
+function wishlistbtn() {
+  const btnWishlist = $('.btn-wishlist').click(function(){
+ const proId = $(this).attr('data-proId');
+
+// $(this).find('i').addClass('active ci-heart-filled fs-5');
+
+
+      $.ajax({
+      url:  window.location.origin +"/e-shop/back-end/wish-cart-setup.php",
+      type: 'GET',
+      data: {'proId':proId},
+      dataType: 'json', 
+      success: function(result) {
+        console.log(result.alert);
+
+        },
+      error: function(error) {
+          console.error('Error:', error);
+      }
+    });
+
+
+
+})
+}
 
 
 

@@ -181,8 +181,9 @@
 <?php require_once("includes_file/script-shop-products.php"); ?>
 
 <script>
+   $(document).ready(function() {
 
-const widgetlinks = $('.widget-links');
+ })
 
 </script>
 
